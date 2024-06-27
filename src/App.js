@@ -5,12 +5,14 @@ import Register from "./pages/Auth/Register";
 import NavBar from "./components/layouts/Navbar";
 import Footer from "./components/layouts/Footer";
 import Container from "./components/layouts/Container";
-import { UserProvider } from "./context/UserContext";
+import UserProvider from "./context/UserContext";
+import Message from "./components/layouts/Message";
 function App() {
   return (
     <Router>
       <UserProvider>
         <NavBar />
+        <Message />
         <Container>
           <Routes>
             <Route path="/" Component={Home} />
@@ -23,6 +25,5 @@ function App() {
     </Router>
   );
 }
-import { UserProvider } from "./context/UserContext";
 
 export default App;
