@@ -10,7 +10,7 @@ function Input({
   multiple,
 }) {
   return (
-    <div>
+    <div className={style.form_control}>
       <label htmlFor={name}>{text}{type == 'submit' ? '' : ':'}</label>
       <input 
         type={type}

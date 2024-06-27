@@ -1,9 +1,10 @@
 import Input from "../../components/form/Input";
-
+import style from "../../components/form/Form.module.css";
+import { Link } from "react-router-dom";
 function Register() {
   function handleOnChange(e) {}
   return (
-    <section>
+    <section className={style.form_container}>
       <h1>Register</h1>
       <form>
         <Input
@@ -41,8 +42,11 @@ function Register() {
           placeholder="Confirme a sua senha "
           handleOnChange={handleOnChange}
         />
-        <Input type='submit' value='cadastrar'/>
+        <Input type="submit" value="cadastrar" />
       </form>
+      <p>
+        Já tem conta ? <Link to="/login"> clique aqui!</Link>
+      </p>
     </section>
   );
 }
