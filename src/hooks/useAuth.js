@@ -48,5 +48,22 @@ export default function useAuth() {
     navigate("/");
     setFlashMessages(msgText, msgType);
   }
-  return { authenticated, register, logout };
+  async function login (user){
+    let msgText = 'Login realizado com sucesso'
+    let msgType = 'sucess'
+
+    try {
+      console.log('chMNDO ')
+      const data = await api.post("/user/login", user).then((resposta) => {
+        return resposta.data;
+      });
+      await authUser(data);
+    } catch (error) {
+      msgText= error.response.data.message
+      msgType='error'
+    }
+  
+    setFlashMessages(msgText, msgType)
+  }
+  return { authenticated, register, logout, login };
 }

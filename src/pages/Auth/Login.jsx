@@ -5,13 +5,21 @@ import { context } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [user, setUser] = useState({});
+  const { login } = useContext(context);
+
   function handleChange(e) {
-    return "";
+    setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(user);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    login(user);
   }
   return (
     <section className={styles.form_container}>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           text="E-mail"
           type="email"
@@ -19,8 +27,7 @@ function Login() {
           placeholder="Digite seu email"
           handleOnChange={handleChange}
         />
-      </form>
-      <form>
+
         <Input
           text="Senha"
           type="password"
@@ -29,9 +36,12 @@ function Login() {
           handleOnChange={handleChange}
         />
 
-        <Input type="submit" value="Entra" />
+        <Input type="submit" value="Entrar" />
       </form>
-      <p>Não tem conta? <Link to='/register'>Clique aqui!</Link></p>
+
+      <p>
+        Não tem conta? <Link to="/register">Clique aqui!</Link>
+      </p>
     </section>
   );
 }
