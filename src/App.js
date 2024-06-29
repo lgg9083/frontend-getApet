@@ -7,6 +7,7 @@ import Footer from "./components/layouts/Footer";
 import Container from "./components/layouts/Container";
 import UserProvider from "./context/UserContext";
 import Message from "./components/layouts/Message";
+import Profile from "./pages/User/profile";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" Component={Home} />
             <Route path="/Login" Component={Login} />
             <Route path="/Register" Component={Register} />
+            <Route path="user/profile" Component={Profile}/>
           </Routes>
         </Container>
         <Footer />
