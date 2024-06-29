@@ -17,7 +17,7 @@ function NavBar() {
         </li>
 
         {authenticated ? (
-          <Link onClick={logout}>logado</Link>
+          <Link onClick={logout}>Sair</Link>
         ) : (
           <>
             <li>
