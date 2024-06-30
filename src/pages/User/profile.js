@@ -3,10 +3,11 @@ import formStyles from "../../components/form/Form.module.css";
 import Input from "../../components/form/Input";
 import { useState, useEffect, useContext } from "react";
 import api from "../../utils/api";
+import useFlashMessages from "../../hooks/UseFlashMessage";
 function Profile() {
   const [user, setUser] = useState({});
   const [token] = useState(localStorage.getItem("token") || "");
-
+  const { setFlashMessages } = useFlashMessages();
   useEffect(() => {
     api
       .get("/user/checkUser", {
@@ -18,11 +19,38 @@ function Profile() {
         setUser(response.data);
       });
   }, []);
-  function onFileChange() {
-    return;
+  function onFileChange(e) {
+    setUser({ ...user, [e.target.name]: e.target.files[0] });
   }
-  function handleChange() {
-    return;
+  function handleChange(e) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    let msgType = "sucess";
+    const formData = new FormData();
+    
+    const userFormData = await Object.keys(user).forEach((key) => 
+      formData.append(key, user[key])
+    );
+  
+    const data = await api
+      .patch(`user/edit/${user._id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        msgType = "error";
+        console.log(error);
+        return error.response.data;
+      });
+    setFlashMessages(data.message, msgType);
   }
   return (
     <section>
@@ -30,11 +58,11 @@ function Profile() {
         <h1>Perfil</h1>
         <p>Previw de imagem </p>
       </div>
-      <form className={formStyles.form_container}>
+      <form onSubmit={handleSubmit} className={formStyles.form_container}>
         <Input
           text="Imagem"
           type="file"
-          name="image"
+          name="imagem"
           handleOnChange={onFileChange}
         />
         <Input

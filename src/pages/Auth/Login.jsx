@@ -10,7 +10,6 @@ function Login() {
 
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user);
   }
   function handleSubmit(e) {
     e.preventDefault();
