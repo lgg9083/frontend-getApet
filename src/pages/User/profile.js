@@ -3,6 +3,7 @@ import formStyles from "../../components/form/Form.module.css";
 import Input from "../../components/form/Input";
 import { useState, useEffect, useContext } from "react";
 import api from "../../utils/api";
+import RoundedImage from "../../components/layouts/RoundedImage";
 import useFlashMessages from "../../hooks/UseFlashMessage";
 function Profile() {
   const [user, setUser] = useState({});
@@ -59,7 +60,7 @@ function Profile() {
       <div className={styles.profile_container}>
         <h1>Perfil</h1>
         {(user.imagem || preview) && (
-          <img
+          <RoundedImage
             src={preview ? URL.createObjectURL(preview) : ""}
             alt={preview}
           />
