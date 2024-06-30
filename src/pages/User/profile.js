@@ -7,6 +7,7 @@ import useFlashMessages from "../../hooks/UseFlashMessage";
 function Profile() {
   const [user, setUser] = useState({});
   const [token] = useState(localStorage.getItem("token") || "");
+  const [preview, setPreview] = useState("");
   const { setFlashMessages } = useFlashMessages();
   useEffect(() => {
     api
@@ -20,6 +21,7 @@ function Profile() {
       });
   }, []);
   function onFileChange(e) {
+    setPreview(e.target.files[0]);
     setUser({ ...user, [e.target.name]: e.target.files[0] });
   }
   function handleChange(e) {
@@ -30,11 +32,11 @@ function Profile() {
 
     let msgType = "sucess";
     const formData = new FormData();
-    
-    const userFormData = await Object.keys(user).forEach((key) => 
+
+    const userFormData = await Object.keys(user).forEach((key) =>
       formData.append(key, user[key])
     );
-  
+
     const data = await api
       .patch(`user/edit/${user._id}`, formData, {
         headers: {
@@ -56,6 +58,12 @@ function Profile() {
     <section>
       <div className={styles.profile_container}>
         <h1>Perfil</h1>
+        {(user.imagem || preview) && (
+          <img
+            src={preview ? URL.createObjectURL(preview) : ""}
+            alt={preview}
+          />
+        )}
         <p>Previw de imagem </p>
       </div>
       <form onSubmit={handleSubmit} className={formStyles.form_container}>
