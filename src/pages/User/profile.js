@@ -2,10 +2,22 @@ import styles from "./profile.module.css";
 import formStyles from "../../components/form/Form.module.css";
 import Input from "../../components/form/Input";
 import { useState, useEffect, useContext } from "react";
-
+import api from "../../utils/api";
 function Profile() {
   const [user, setUser] = useState({});
+  const [token] = useState(localStorage.getItem("token") || "");
 
+  useEffect(() => {
+    api
+      .get("/user/checkUser", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        setUser(response.data);
+      });
+  }, []);
   function onFileChange() {
     return;
   }
@@ -47,7 +59,7 @@ function Profile() {
           name="phone"
           placeholder="Digite o seu telefone"
           handleOnChange={handleChange}
-          value={user.telefone || ""}
+          value={user.phone || ""}
         />
         <Input
           text="senha"
