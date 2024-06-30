@@ -8,6 +8,7 @@ import Container from "./components/layouts/Container";
 import UserProvider from "./context/UserContext";
 import Message from "./components/layouts/Message";
 import Profile from "./pages/User/profile";
+import MyPets from "./pages/Pet/MyPets";
 function App() {
   return (
     <Router>
@@ -17,9 +18,10 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" Component={Home} />
+            <Route path="/pets/mypets" Component={MyPets} />
             <Route path="/Login" Component={Login} />
             <Route path="/Register" Component={Register} />
-            <Route path="user/profile" Component={Profile}/>
+            <Route path="user/profile" Component={Profile} />
           </Routes>
         </Container>
         <Footer />
