@@ -3,6 +3,7 @@ import api from "../../utils/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFlashMessages from "../../hooks/UseFlashMessage";
+import PetForm from "../../components/form/PetForm";
 function AddPet() {
   const navigate = useNavigate();
   const { setFlashMessages } = useFlashMessages();
@@ -12,7 +13,7 @@ function AddPet() {
         <h1>Cadastre um Pet</h1>
         <p>Depois ele ficará disponível para adoção</p>
       </div>
-      <p>formulário</p>
+      <PetForm btnText='Cadastrar'/>
     </section>
   );
 }
