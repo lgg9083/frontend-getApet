@@ -21,10 +21,40 @@ function EditPet() {
         setPet(response.data.pet);
       });
   }, [token, id]);
-  async function updatedPet(pet) {}
+  async function updatedPet(pet) {
+    let msgType = "sucess";
+    const formData = new FormData();
+
+    await Object.keys(pet).forEach((key) => {
+      if (key === "images") {
+        for (let i = 0; i < pet[key].length; i++) {
+          formData.append("images", pet[key][i]);
+        }
+      } else {
+        formData.append(key, pet[key]);
+      }
+    });
+
+    const data = await api
+      .patch(`pets/${pet._id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+
+    setFlashMessages(data.message, msgType);
+  }
   return (
     <section>
-      <div className={styles.adpoter_header00000}>
+      <div className={styles.addpet_header}>
         <h1>Editando o Pet : {pet.name}</h1>
         <p>Depois da edição os dado serão atualizados no sistema</p>
       </div>
