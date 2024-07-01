@@ -10,8 +10,8 @@ import Message from "./components/layouts/Message";
 import Profile from "./pages/User/profile";
 import MyPets from "./pages/Pet/MyPets";
 import AddPet from "./pages/Pet/AddPet";
-import EditPet from "./pages/Pet/EditPet";
-
+import EditPet from './pages/Pet/EditPet'
+import PetDetails from "./pages/Pet/PetDetails";
 function App() {
   return (
     <Router>
@@ -27,6 +27,7 @@ function App() {
             <Route path="/Register" Component={Register} />
             <Route path="user/profile" Component={Profile} />
             <Route path="pets/edit/:id" Component={EditPet} />
+            <Route path="pets/:id" Component={PetDetails} />
           </Routes>
         </Container>
         <Footer />
