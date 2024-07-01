@@ -21,8 +21,7 @@ function PetForm({ handleSubmit, petData, btnText }) {
 
   function submit(e) {
     e.preventDefault();
-    console.log(pet);
-    // handleSubmit(pet);
+    handleSubmit(pet);
   }
   return (
     <form onSubmit={submit} className={formstyles.form_container}>
@@ -66,10 +65,10 @@ function PetForm({ handleSubmit, petData, btnText }) {
       <Input
         text="Peso do Pet"
         type="number"
-        name="weigth"
+        name="weight"
         placeholder="Digite o peso do pet"
         handleOnChange={handleChange}
-        value={pet.weigth || ""}
+        value={pet.weight || ""}
       />
       <Select
         text="Selecione uma cor"
