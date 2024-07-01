@@ -9,6 +9,7 @@ import UserProvider from "./context/UserContext";
 import Message from "./components/layouts/Message";
 import Profile from "./pages/User/profile";
 import MyPets from "./pages/Pet/MyPets";
+import AddPet from "./pages/Pet/AddPet";
 function App() {
   return (
     <Router>
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" Component={Home} />
             <Route path="/pets/mypets" Component={MyPets} />
             <Route path="/Login" Component={Login} />
+            <Route path="/pets/add" Component={AddPet} />
             <Route path="/Register" Component={Register} />
             <Route path="user/profile" Component={Profile} />
           </Routes>
