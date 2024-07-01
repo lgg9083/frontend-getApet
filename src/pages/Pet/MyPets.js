@@ -21,6 +21,27 @@ function MyPets() {
         setPets(response.data.pets);
       });
   }, [token]);
+
+  async function removePet(id) {
+    let msgType = "sucess";
+
+    const data = await api
+      .delete(`/pets/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        const updatedPets = pets.filter((pet) => pet._id != id);
+        setPets(updatedPets);
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+    setFlashMessages(data.message, msgType);
+  }
   return (
     <section>
       <div className={styles.petlist_header}>
@@ -47,7 +68,7 @@ function MyPets() {
                       </button>
                     )}
                     <Link to={`/pets/edit/${pet._id}`}>Editar</Link>
-                    <button> Excluir</button>
+                    <button onClick={() => removePet(pet._id)}> Excluir</button>
                   </>
                 ) : (
                   <p>Pet ja Adotado</p>
