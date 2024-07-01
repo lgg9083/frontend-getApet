@@ -12,7 +12,29 @@ function Home() {
   }, []);
   return (
     <section>
-      <h1>Home</h1>
+      <div>
+        <h1>Adote um Pet</h1>
+        <p>Veja os detalhes de cada e conheça o tutor deles</p>
+      </div>
+      <div>
+        {pet.length > 0 &&
+          pet.map((pet) => (
+            <div>
+              <p>Imagem do Pet</p>
+              <h3>{pet.name}</h3>
+              <p>
+                <span className="bold">Peso : </span>
+                {pet.weight}kg
+              </p>
+              {pet.available ? (
+                <Link to={`pet/${pet._id}`}>Mais detalhes</Link>
+              ) : (
+                <p>Adotado</p>
+              )}
+            </div>
+          ))}
+        {pet.length === 0 && <p> Não há pets disponiveis para adoção</p>}
+      </div>
     </section>
   );
 }
