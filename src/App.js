@@ -10,8 +10,9 @@ import Message from "./components/layouts/Message";
 import Profile from "./pages/User/profile";
 import MyPets from "./pages/Pet/MyPets";
 import AddPet from "./pages/Pet/AddPet";
-import EditPet from './pages/Pet/EditPet'
+import EditPet from "./pages/Pet/EditPet";
 import PetDetails from "./pages/Pet/PetDetails";
+import MyAdoptions from "./pages/Pet/MyAdoptions";
 function App() {
   return (
     <Router>
@@ -28,6 +29,7 @@ function App() {
             <Route path="user/profile" Component={Profile} />
             <Route path="pets/edit/:id" Component={EditPet} />
             <Route path="pets/:id" Component={PetDetails} />
+            <Route path="pets/myadptions" Component={MyAdoptions} />
           </Routes>
         </Container>
         <Footer />
