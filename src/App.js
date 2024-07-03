@@ -21,15 +21,15 @@ function App() {
         <Message />
         <Container>
           <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/pets/mypets" Component={MyPets} />
-            <Route path="/Login" Component={Login} />
-            <Route path="/pets/add" Component={AddPet} />
-            <Route path="/Register" Component={Register} />
-            <Route path="user/profile" Component={Profile} />
-            <Route path="pets/edit/:id" Component={EditPet} />
-            <Route path="pets/:id" Component={PetDetails} />
-            <Route path="pets/myadptions" Component={MyAdoptions} />
+            <Route path="/" element={Home} />
+            <Route path="/pets/mypets" element={MyPets} />
+            <Route path="/Login" element={Login} />
+            <Route path="/pets/add" element={AddPet} />
+            <Route path="/Register" element={Register} />
+            <Route path="user/profile" element={Profile} />
+            <Route path="pets/edit/:id" element={EditPet} />
+            <Route path="pets/:id" element={PetDetails} />
+            <Route path="pets/myadptions" element={MyAdoptions} />
           </Routes>
         </Container>
         <Footer />
