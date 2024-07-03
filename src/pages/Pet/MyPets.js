@@ -42,6 +42,30 @@ function MyPets() {
       });
     setFlashMessages(data.message, msgType);
   }
+
+  async function concludeAdpotion(id) {
+    let msgType = "sucess";
+
+    const data = await api
+      .patch(
+        `/pets/concludes/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        }
+      )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        return err.response.data;
+      });
+
+    setFlashMessages(data.message, msgType);
+  }
   return (
     <section>
       <div className={styles.petlist_header}>
@@ -63,7 +87,12 @@ function MyPets() {
                   <>
                     {console.log(pet)}
                     {pet.adpoter && (
-                      <button className={styles.conclude_btn}>
+                      <button
+                        className={styles.conclude_btn}
+                        onClick={() => {
+                          concludeAdpotion(pet._id);
+                        }}
+                      >
                         concluir adução
                       </button>
                     )}
